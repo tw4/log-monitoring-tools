@@ -3,9 +3,20 @@
 [<p align="center"><img src="https://socialify.git.ci/BuzzSpire/log-monitoring-tools-/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 ](https://socialify.git.ci/BuzzSpire/log-monitoring-tools/image?language=1&owner=1&name=1&stargazers=1&theme=Light)
 
-<p id="description">Log Monitoring Tools is an open source application that makes it easy to monitor logs on servers on your network or on your own computer. It is designed for developers and system administrators.</p>
+<p id="description">Log Monitoring Tools is an open source <b>cross</b> application that makes it easy to monitor logs on servers on your network or on your own computer. It is designed for developers and system administrators.</p>
 
-<p align="center"><img src="https://img.shields.io/github/license/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/last-commit/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/languages/count/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/issues/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/forks/BuzzSpire/log-monitoring-tools?style=social" alt="shields"><img src="https://img.shields.io/github/contributors/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/v/release/BuzzSpire/log-monitoring-tools" alt="shields"></p>
+<p align="center"><img src="https://img.shields.io/github/license/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/last-commit/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/languages/count/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/issues/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/forks/BuzzSpire/log-monitoring-tools?style=social" alt="shields"><img src="https://img.shields.io/github/contributors/BuzzSpire/log-monitoring-tools" alt="shields"><img src="https://img.shields.io/github/v/release/BuzzSpire/log-monitoring-tools" alt="shields">
+  <img alt="GitHub branch status" src="https://img.shields.io/github/checks-status/BuzzSpire/log-monitoring-tools/main">
+<img alt="GitHub Actions Workflow Status" src="https://img.shields.io/github/actions/workflow/status/BuzzSpire/log-monitoring-tools/node.js.yml">
+<img alt="GitHub Downloads (all assets, latest release)" src="https://img.shields.io/github/downloads/BuzzSpire/log-monitoring-tools/latest/total">
+  <img alt="GitHub repo file or directory count" src="https://img.shields.io/github/directory-file-count/BuzzSpire/log-monitoring-tools">
+
+<img src="https://img.shields.io/badge/Windows%2011-blue?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 11">
+<img src="https://img.shields.io/badge/macOS-black?style=for-the-badge&logo=apple&logoColor=white" alt="macOS">
+  
+</p>
+
+
 
 
 <h2>
