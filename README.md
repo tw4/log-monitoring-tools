@@ -1,6 +1,7 @@
 <h1 align="center" id="title">log-monitoring-tools</h1>
 
-<p align="center"><img src="https://socialify.git.ci/BuzzSpire/log-monitoring-tools-/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
+[<p align="center"><img src="https://socialify.git.ci/BuzzSpire/log-monitoring-tools-/image?language=1&amp;owner=1&amp;name=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
+](https://socialify.git.ci/BuzzSpire/log-monitoring-tools/image?language=1&owner=1&name=1&stargazers=1&theme=Light)
 
 <p id="description">Log Monitoring Tools is an open source application that makes it easy to monitor logs on servers on your network or on your own computer. It is designed for developers and system administrators.</p>
 
@@ -10,11 +11,9 @@
   🎥Screenshot
 </h2>
 
-https://github.com/BuzzSpire/log-monitoring-tools/assets/88425310/2c45c629-6c3a-4e74-ba19-63fb898ee153
+https://github.com/BuzzSpire/log-monitoring-tools/assets/88425310/6c1b2eac-74aa-43d6-818f-1edaa775f4f2
 
 
-
-  
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
