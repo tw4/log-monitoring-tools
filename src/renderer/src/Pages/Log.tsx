@@ -1,8 +1,9 @@
 import MainLayout from '@renderer/layout/MainLayout'
 import { useState, useRef, useCallback } from 'react'
 import FileList from '@renderer/components/FileList'
-import { Tabs } from 'antd'
+import { Button, Flex, Tabs } from 'antd'
 import LogContent from '@renderer/components/LogContent'
+import { RedoOutlined } from '@ant-design/icons'
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string
 
@@ -69,8 +70,15 @@ export default function Log(): JSX.Element {
     setActiveKey(newActiveKey)
   }, [])
 
+  const reFersh = (): void => {
+    window.location.reload()
+  }
+
   return (
     <MainLayout locationKey="2">
+      <Flex justify="end">
+        <Button type="default" icon={<RedoOutlined />} onClick={reFersh}></Button>
+      </Flex>
       <Tabs
         type="editable-card"
         onChange={onChange}
