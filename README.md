@@ -54,6 +54,7 @@ $ npm run dev
 <p>3. Build</p>
 
 <p>4. For windows</p>
+⚠️ Powershell must be used for build and must be run as administrator.
 
 ```
 $ npm run build:win
