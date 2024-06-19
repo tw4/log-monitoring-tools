@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Flex, Pagination, Table, TableColumnsType } from 'antd'
+import { Flex, Pagination, Select, SelectProps, Table, TableColumnsType } from 'antd'
 import { Input } from 'antd'
 
 interface FileListProps {
@@ -24,6 +24,8 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
   const [paths, setPaths] = useState<string[]>([])
   const [page, setPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(20)
+  const [options, setOptions] = useState<SelectProps[]>([])
+  const [selectedFileTypes, setSelectedFileTypes] = useState<string[]>([])
 
   const { Search } = Input
 
@@ -36,6 +38,15 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
         .then((data) => {
           setData(data)
         })
+
+      window.electron.ipcRenderer.invoke('get-file-types', JSON.parse(paths)).then((data) => {
+        setOptions(
+          data.map((item) => ({
+            label: item,
+            value: item
+          }))
+        )
+      })
 
       // get total page number
       window.electron.ipcRenderer.invoke('get-total-page', JSON.parse(paths), 10).then((data) => {
@@ -63,7 +74,7 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     }
     if (value) {
       window.electron.ipcRenderer
-        .invoke('serach-file-name', JSON.parse(path), value)
+        .invoke('serach-file-name', JSON.parse(path), value, selectedFileTypes)
         .then((data) => {
           setData(data)
           setPage(0)
@@ -76,6 +87,10 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     }
   }
 
+  const handleChange = (value: string[]): void => {
+    setSelectedFileTypes(value)
+  }
+
   return (
     <Flex
       vertical
@@ -86,12 +101,17 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
         borderRadius: '5px'
       }}
     >
-      <Search
-        placeholder="input search file name"
-        onSearch={onSearch}
-        style={{ width: 200, marginBottom: '10px' }}
-      />
-
+      <Flex justify="space-between" style={{ marginBottom: '10px' }}>
+        <Search placeholder="input search file name" onSearch={onSearch} style={{ width: 200 }} />
+        <Select
+          mode="multiple"
+          allowClear
+          style={{ width: '25%' }}
+          placeholder="Please select"
+          onChange={handleChange}
+          options={options}
+        />
+      </Flex>
       <Flex
         vertical
         style={{
