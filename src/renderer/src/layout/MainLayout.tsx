@@ -103,9 +103,7 @@ export default function MainLayout({ children, locationKey }: MainLayoutProps): 
                 {children}
               </div>
             </Content>
-            <Footer style={{ textAlign: 'center' }}>
-              BuzzSpire ©{new Date().getFullYear()} Created by tw4 (Mert)
-            </Footer>
+            <Footer style={{ textAlign: 'center' }}>Created by tw4 (Mert)</Footer>
           </Layout>
         </>
       )}
