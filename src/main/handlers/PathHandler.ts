@@ -113,7 +113,7 @@ export default function registerPathHandler(): void {
 
   ipcMain.handle(
     'serach-file-name',
-    async (event, paths: Path[], fileName: string): Promise<string[]> => {
+    async (event, paths: Path[], fileName: string, fileTypes: string[]): Promise<string[]> => {
       console.log(event)
       const allFiles: string[] = []
       paths.forEach((current) => {
@@ -125,7 +125,20 @@ export default function registerPathHandler(): void {
         }
       })
 
-      return allFiles.filter((file) => file.toUpperCase().includes(fileName.toUpperCase()))
+      if (fileTypes.length > 0) {
+        const res: string[] = []
+        fileTypes.forEach((fileType) => {
+          res.push(
+            ...allFiles.filter(
+              (file) =>
+                file.toLowerCase().includes(fileName) && file.toLowerCase().endsWith(fileType)
+            )
+          )
+        })
+        return res
+      } else {
+        return allFiles.filter((file) => file.toLowerCase().includes(fileName.toLowerCase()))
+      }
     }
   )
 
@@ -140,12 +153,15 @@ export default function registerPathHandler(): void {
         allFiles.push(current.path)
       }
     })
-    const fileTypes = allFiles.map((file) => {
+    let fileTypes = allFiles.map((file) => {
       if (file.includes('.')) {
         return file.split('.').pop()
       }
       return
     })
-    return fileTypes as string[]
+
+    fileTypes = fileTypes.filter((file) => file !== undefined)
+    const setList = new Set(fileTypes)
+    return Array.from(setList) as string[]
   })
 }

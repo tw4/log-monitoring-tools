@@ -25,20 +25,11 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
   const [page, setPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(20)
   const [options, setOptions] = useState<SelectProps[]>([])
+  const [selectedFileTypes, setSelectedFileTypes] = useState<string[]>([])
 
   const { Search } = Input
 
   useEffect(() => {
-    for (let index = 0; index < 10; index++) {
-      setOptions((prev) => [
-        ...prev,
-        {
-          label: `file${index}`,
-          value: `file${index}`
-        }
-      ])
-    }
-
     const paths = localStorage.getItem('paths')
     if (paths) {
       setPaths(JSON.parse(paths))
@@ -47,6 +38,15 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
         .then((data) => {
           setData(data)
         })
+
+      window.electron.ipcRenderer.invoke('get-file-types', JSON.parse(paths)).then((data) => {
+        setOptions(
+          data.map((item) => ({
+            label: item,
+            value: item
+          }))
+        )
+      })
 
       // get total page number
       window.electron.ipcRenderer.invoke('get-total-page', JSON.parse(paths), 10).then((data) => {
@@ -74,7 +74,7 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     }
     if (value) {
       window.electron.ipcRenderer
-        .invoke('serach-file-name', JSON.parse(path), value)
+        .invoke('serach-file-name', JSON.parse(path), value, selectedFileTypes)
         .then((data) => {
           setData(data)
           setPage(0)
@@ -88,8 +88,7 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
   }
 
   const handleChange = (value: string[]): void => {
-    console.log(`selected ${value}`)
-    setSelectedFile(value)
+    setSelectedFileTypes(value)
   }
 
   return (
