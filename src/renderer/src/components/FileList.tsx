@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Flex, Pagination, Table, TableColumnsType } from 'antd'
+import { Flex, Pagination, Select, SelectProps, Table, TableColumnsType } from 'antd'
 import { Input } from 'antd'
 
 interface FileListProps {
@@ -24,10 +24,21 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
   const [paths, setPaths] = useState<string[]>([])
   const [page, setPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(20)
+  const [options, setOptions] = useState<SelectProps[]>([])
 
   const { Search } = Input
 
   useEffect(() => {
+    for (let index = 0; index < 10; index++) {
+      setOptions((prev) => [
+        ...prev,
+        {
+          label: `file${index}`,
+          value: `file${index}`
+        }
+      ])
+    }
+
     const paths = localStorage.getItem('paths')
     if (paths) {
       setPaths(JSON.parse(paths))
@@ -76,6 +87,11 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     }
   }
 
+  const handleChange = (value: string[]): void => {
+    console.log(`selected ${value}`)
+    setSelectedFile(value)
+  }
+
   return (
     <Flex
       vertical
@@ -86,12 +102,17 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
         borderRadius: '5px'
       }}
     >
-      <Search
-        placeholder="input search file name"
-        onSearch={onSearch}
-        style={{ width: 200, marginBottom: '10px' }}
-      />
-
+      <Flex justify="space-between" style={{ marginBottom: '10px' }}>
+        <Search placeholder="input search file name" onSearch={onSearch} style={{ width: 200 }} />
+        <Select
+          mode="multiple"
+          allowClear
+          style={{ width: '25%' }}
+          placeholder="Please select"
+          onChange={handleChange}
+          options={options}
+        />
+      </Flex>
       <Flex
         vertical
         style={{

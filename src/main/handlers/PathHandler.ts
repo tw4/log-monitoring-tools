@@ -128,4 +128,24 @@ export default function registerPathHandler(): void {
       return allFiles.filter((file) => file.toUpperCase().includes(fileName.toUpperCase()))
     }
   )
+
+  ipcMain.handle('get-file-types', async (event, paths: Path[]): Promise<string[]> => {
+    console.log(event)
+    const allFiles: string[] = []
+    paths.forEach((current) => {
+      const stats = fs.statSync(current.path)
+      if (stats.isDirectory()) {
+        allFiles.push(...readAllFilesName(current.path))
+      } else {
+        allFiles.push(current.path)
+      }
+    })
+    const fileTypes = allFiles.map((file) => {
+      if (file.includes('.')) {
+        return file.split('.').pop()
+      }
+      return
+    })
+    return fileTypes as string[]
+  })
 }
