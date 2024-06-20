@@ -14,7 +14,7 @@ export default function AddNewPath(): JSX.Element {
     const paths = localStorage.getItem('paths')
     const data: Path[] = paths ? JSON.parse(paths) : []
     setPaths(data)
-  }, [])
+  }, [newPath, serverName])
 
   const addPath = (): void => {
     if (!serverName || !newPath) {
