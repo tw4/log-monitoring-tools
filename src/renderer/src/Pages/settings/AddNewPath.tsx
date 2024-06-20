@@ -9,6 +9,7 @@ export default function AddNewPath(): JSX.Element {
   const [serverName, setServerName] = useState<string>('')
   const [newPath, setNewPath] = useState<string>('')
   const [alertIsVisible, setAlertIsVisible] = useState<boolean>(false)
+  const [alertMessage, setAlertMessage] = useState<string>('')
 
   useEffect(() => {
     const paths = localStorage.getItem('paths')
@@ -17,10 +18,23 @@ export default function AddNewPath(): JSX.Element {
   }, [newPath, serverName])
 
   const addPath = (): void => {
+    const p2 = localStorage.getItem('paths')
     if (!serverName || !newPath) {
+      setAlertMessage('Please enter a valid path and server name.')
       setAlertIsVisible(true)
       return
     }
+
+    if (p2) {
+      const p = JSON.parse(p2)
+      const isPathExist = p.find((path: Path) => path.path === newPath)
+      if (isPathExist) {
+        setAlertMessage('Path already exists.')
+        setAlertIsVisible(true)
+        return
+      }
+    }
+
     if (!newPath) return
     const newPaths = [
       ...paths,
@@ -95,7 +109,7 @@ export default function AddNewPath(): JSX.Element {
     <MainLayout locationKey="3">
       {alertIsVisible && (
         <Alert
-          message="Please enter a valid path and server name."
+          message={alertMessage}
           type="error"
           showIcon
           closable
