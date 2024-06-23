@@ -22,6 +22,18 @@ export default function LogContent({ fileName }: LogContentProps): JSX.Element {
     }
   }, [])
 
+  const downloadData = (): void => {
+    const blob = new Blob([data], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = fileName
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <>
       <Flex justify="space-between">
@@ -31,7 +43,9 @@ export default function LogContent({ fileName }: LogContentProps): JSX.Element {
           enterButton
           style={{ width: 200 }}
         />
-        <Button type="primary" icon={<DownloadOutlined />} style={{ marginLeft: 10 }} />
+        <Button type="primary" onClick={downloadData} icon={<DownloadOutlined />}>
+          Download
+        </Button>
       </Flex>
       {data.split('\n').map((line, index) => {
         if (searchValue && line.includes(searchValue)) {
