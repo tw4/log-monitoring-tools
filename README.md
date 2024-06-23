@@ -23,8 +23,8 @@
   🎥Screenshot
 </h2>
 
-https://github.com/BuzzSpire/log-monitoring-tools/assets/88425310/6c1b2eac-74aa-43d6-818f-1edaa775f4f2
 
+https://github.com/tw4/log-monitoring-tools/assets/88425310/a640681b-2f4d-407b-a148-dcc71a113c6d
 
 <h2>🧐 Features</h2>
 
