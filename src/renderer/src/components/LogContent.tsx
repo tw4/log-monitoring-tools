@@ -1,5 +1,6 @@
-import { Flex, Input } from 'antd'
+import { Button, Flex, Input } from 'antd'
 import { useEffect, useState } from 'react'
+import { DownloadOutlined } from '@ant-design/icons'
 
 interface LogContentProps {
   fileName: string
@@ -23,11 +24,15 @@ export default function LogContent({ fileName }: LogContentProps): JSX.Element {
 
   return (
     <>
-      <Search
-        placeholder="input search text"
-        onSearch={(value) => setSearchValue(value)}
-        enterButton
-      />
+      <Flex justify="space-between">
+        <Search
+          placeholder="input search text"
+          onSearch={(value) => setSearchValue(value)}
+          enterButton
+          style={{ width: 200 }}
+        />
+        <Button type="primary" icon={<DownloadOutlined />} style={{ marginLeft: 10 }} />
+      </Flex>
       {data.split('\n').map((line, index) => {
         if (searchValue && line.includes(searchValue)) {
           const start = line.indexOf(searchValue)
