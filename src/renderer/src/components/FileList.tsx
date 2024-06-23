@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Flex, Pagination, Select, SelectProps, Table, TableColumnsType } from 'antd'
 import { Input } from 'antd'
+import type { Path } from '../types'
 
 interface FileListProps {
   setSelectedFile: (fileName: string[]) => void
@@ -21,11 +22,13 @@ const colcolumns: TableColumnsType<DataType> = [
 
 export default function FileList({ setSelectedFile }: FileListProps): JSX.Element {
   const [data, setData] = useState<string[]>([])
-  const [paths, setPaths] = useState<string[]>([])
+  const [paths, setPaths] = useState<Path[]>([])
   const [page, setPage] = useState<number>(1)
   const [pageSize, setPageSize] = useState<number>(20)
   const [options, setOptions] = useState<SelectProps[]>([])
   const [selectedFileTypes, setSelectedFileTypes] = useState<string[]>([])
+  const [pathOptions, setPathOptions] = useState<SelectProps[]>([])
+  const [selectedPath, setSelectedPath] = useState<string>('')
 
   const { Search } = Input
 
@@ -33,6 +36,13 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     const paths = localStorage.getItem('paths')
     if (paths) {
       setPaths(JSON.parse(paths))
+      setPathOptions(
+        JSON.parse(paths).map((item: Path) => ({
+          label: item.path,
+          value: item.path
+        }))
+      )
+
       window.electron.ipcRenderer
         .invoke('read-all-files', JSON.parse(paths), 1, 10)
         .then((data) => {
@@ -74,7 +84,7 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     }
     if (value) {
       window.electron.ipcRenderer
-        .invoke('serach-file-name', JSON.parse(path), value, selectedFileTypes)
+        .invoke('serach-file-name', JSON.parse(path), value, selectedFileTypes, selectedPath)
         .then((data) => {
           setData(data)
           setPage(0)
@@ -91,6 +101,10 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     setSelectedFileTypes(value)
   }
 
+  const handleChangedPathOption = (value: string): void => {
+    setSelectedPath(value)
+  }
+
   return (
     <Flex
       vertical
@@ -103,6 +117,11 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
     >
       <Flex justify="space-between" style={{ marginBottom: '10px' }}>
         <Search placeholder="input search file name" onSearch={onSearch} style={{ width: 200 }} />
+        <Select
+          placeholder="Please select file path"
+          onChange={handleChangedPathOption}
+          options={pathOptions}
+        />
         <Select
           mode="multiple"
           allowClear
