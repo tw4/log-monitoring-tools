@@ -1,5 +1,6 @@
-import { Flex, Input } from 'antd'
+import { Button, Flex, Input } from 'antd'
 import { useEffect, useState } from 'react'
+import { DownloadOutlined } from '@ant-design/icons'
 
 interface LogContentProps {
   fileName: string
@@ -21,13 +22,31 @@ export default function LogContent({ fileName }: LogContentProps): JSX.Element {
     }
   }, [])
 
+  const downloadData = (): void => {
+    const blob = new Blob([data], { type: 'text/plain;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = fileName
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <>
-      <Search
-        placeholder="input search text"
-        onSearch={(value) => setSearchValue(value)}
-        enterButton
-      />
+      <Flex justify="space-between">
+        <Search
+          placeholder="input search text"
+          onSearch={(value) => setSearchValue(value)}
+          enterButton
+          style={{ width: 200 }}
+        />
+        <Button type="primary" onClick={downloadData} icon={<DownloadOutlined />}>
+          Download
+        </Button>
+      </Flex>
       {data.split('\n').map((line, index) => {
         if (searchValue && line.includes(searchValue)) {
           const start = line.indexOf(searchValue)
