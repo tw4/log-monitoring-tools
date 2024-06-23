@@ -113,17 +113,33 @@ export default function registerPathHandler(): void {
 
   ipcMain.handle(
     'serach-file-name',
-    async (event, paths: Path[], fileName: string, fileTypes: string[]): Promise<string[]> => {
+    async (
+      event,
+      paths: Path[],
+      fileName: string,
+      fileTypes: string[],
+      selectedPath: string
+    ): Promise<string[]> => {
       console.log(event)
       const allFiles: string[] = []
-      paths.forEach((current) => {
-        const stats = fs.statSync(current.path)
+
+      if (selectedPath !== '') {
+        const stats = fs.statSync(selectedPath)
         if (stats.isDirectory()) {
-          allFiles.push(...readAllFilesName(current.path))
+          allFiles.push(...readAllFilesName(selectedPath))
         } else {
-          allFiles.push(current.path)
+          allFiles.push(selectedPath)
         }
-      })
+      } else {
+        paths.forEach((current) => {
+          const stats = fs.statSync(current.path)
+          if (stats.isDirectory()) {
+            allFiles.push(...readAllFilesName(current.path))
+          } else {
+            allFiles.push(current.path)
+          }
+        })
+      }
 
       if (fileTypes.length > 0) {
         const res: string[] = []
