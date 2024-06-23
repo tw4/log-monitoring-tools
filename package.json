@@ -1,6 +1,6 @@
 {
   "name": "log-monitoring-tools",
-  "version": "2024.0600.0",
+  "version": "2024.0623.0",
   "description": "Log Monitoring Tools is an open source cross application that makes it easy to monitor logs on servers on your network or on your own computer. It is designed for developers and system administrators.",
   "main": "./out/main/index.js",
   "author": "tw4 (Mert)",
