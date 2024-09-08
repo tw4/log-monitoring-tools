@@ -38,7 +38,7 @@ export default function FileList({ setSelectedFile }: FileListProps): JSX.Elemen
       setPaths(JSON.parse(paths))
       setPathOptions(
         JSON.parse(paths).map((item: Path) => ({
-          label: item.path,
+          label: item.serverName,
           value: item.path
         }))
       )
