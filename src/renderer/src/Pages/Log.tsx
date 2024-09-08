@@ -1,7 +1,7 @@
 import MainLayout from '@renderer/layout/MainLayout'
 import { useState, useRef, useCallback } from 'react'
 import FileList from '@renderer/components/FileList'
-import { Button, Flex, Tabs } from 'antd'
+import { Button, Flex, Tabs, Tooltip } from 'antd'
 import LogContent from '@renderer/components/LogContent'
 import { RedoOutlined } from '@ant-design/icons'
 
@@ -11,7 +11,11 @@ export default function Log(): JSX.Element {
   const newTabIndex = useRef(0)
   const [selectedFile, setSelectedFile] = useState<string[]>([])
   const initialItems = [
-    { label: 'File List', children: <FileList setSelectedFile={setSelectedFile} />, key: '1' }
+    {
+      label: <Tooltip title="File List">File List</Tooltip>,
+      children: <FileList setSelectedFile={setSelectedFile} />,
+      key: '1'
+    }
   ]
   const [activeKey, setActiveKey] = useState(initialItems[0].key)
   const [items, setItems] = useState(initialItems)
@@ -62,7 +66,7 @@ export default function Log(): JSX.Element {
   const add = useCallback((fileName: string): void => {
     const newActiveKey = `newTab${newTabIndex.current++}`
     const newPane = {
-      label: fileName,
+      label: <Tooltip title={fileName}>{fileName.split('/').pop()}</Tooltip>,
       children: <LogContent fileName={fileName} />,
       key: newActiveKey
     }
