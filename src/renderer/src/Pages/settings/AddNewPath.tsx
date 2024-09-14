@@ -1,4 +1,3 @@
-import MainLayout from '@renderer/layout/MainLayout'
 import { Alert, Button, Flex, Input, Rate, Table, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { FolderOutlined } from '@ant-design/icons'
@@ -106,7 +105,7 @@ export default function AddNewPath(): JSX.Element {
   ]
 
   return (
-    <MainLayout locationKey="3">
+    <>
       {alertIsVisible && (
         <Alert
           message={alertMessage}
@@ -152,6 +151,6 @@ export default function AddNewPath(): JSX.Element {
         }))}
         columns={columns}
       />
-    </MainLayout>
+    </>
   )
 }
