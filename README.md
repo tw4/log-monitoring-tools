@@ -24,7 +24,11 @@
 </h2>
 
 
-https://github.com/tw4/log-monitoring-tools/assets/88425310/a640681b-2f4d-407b-a148-dcc71a113c6d
+
+https://github.com/user-attachments/assets/bdefa2b0-acc2-41ae-b3a5-a054ca96d390
+
+
+
 
 <h2>🧐 Features</h2>
 
