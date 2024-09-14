@@ -1,4 +1,3 @@
-import MainLayout from '@renderer/layout/MainLayout'
 import { useState, useRef, useCallback } from 'react'
 import FileList from '@renderer/components/FileList'
 import { Button, Flex, Tabs, Tooltip } from 'antd'
@@ -79,7 +78,7 @@ export default function Log(): JSX.Element {
   }
 
   return (
-    <MainLayout locationKey="2">
+    <>
       <Flex justify="end">
         <Button type="default" icon={<RedoOutlined />} onClick={reFersh}></Button>
       </Flex>
@@ -91,6 +90,6 @@ export default function Log(): JSX.Element {
         items={items}
         style={{ marginBottom: 20 }}
       />
-    </MainLayout>
+    </>
   )
 }

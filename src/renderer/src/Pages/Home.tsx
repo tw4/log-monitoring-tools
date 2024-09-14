@@ -1,4 +1,3 @@
-import MainLayout from '@renderer/layout/MainLayout'
 import { Col, Flex, Row, Statistic, Table, Tag } from 'antd'
 import { useEffect, useState } from 'react'
 import { FolderOutlined } from '@ant-design/icons'
@@ -61,7 +60,7 @@ export default function Home(): JSX.Element {
   }
 
   return (
-    <MainLayout locationKey="1">
+    <>
       {loading ? (
         <Flex vertical>
           <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -94,6 +93,6 @@ export default function Home(): JSX.Element {
         }))}
         columns={columns}
       />{' '}
-    </MainLayout>
+    </>
   )
 }

@@ -8,6 +8,7 @@ import Log from './Pages/Log'
 import AddNewPath from './Pages/settings/AddNewPath'
 import ConnectToDb from './Pages/settings/ConnectToDb'
 import { createHashRouter } from 'react-router-dom'
+import MainLayout from './layout/MainLayout'
 
 const routers = createHashRouter([
   {
@@ -30,6 +31,8 @@ const routers = createHashRouter([
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={routers} />
+    <MainLayout locationKey="0">
+      <RouterProvider router={routers} />
+    </MainLayout>
   </React.StrictMode>
 )
