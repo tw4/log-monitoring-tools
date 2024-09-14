@@ -10,6 +10,8 @@ function createWindow(): void {
     width: 900,
     height: 670,
     show: false,
+    title: 'Log Monitoring Tools',
+    icon: icon,
     autoHideMenuBar: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
@@ -36,12 +38,14 @@ function createWindow(): void {
   }
 }
 
+app.dock.setIcon(icon)
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.log-monitorung-tools')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

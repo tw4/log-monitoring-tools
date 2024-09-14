@@ -1,4 +1,4 @@
-appId: com.electron.app
+appId: com.log-monitoring-tools
 productName: log-monitoring-tools
 directories:
   buildResources: build
