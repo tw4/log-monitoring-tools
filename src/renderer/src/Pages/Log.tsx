@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import FileList from '@renderer/components/FileList'
 import { Button, Flex, Tabs, Tooltip } from 'antd'
 import LogContent from '@renderer/components/LogContent'
@@ -9,6 +9,7 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string
 export default function Log(): JSX.Element {
   const newTabIndex = useRef(0)
   const [selectedFile, setSelectedFile] = useState<string[]>([])
+  const [platform, setPlatform] = useState<string>('')
   const initialItems = [
     {
       label: <Tooltip title="File List">File List</Tooltip>,
@@ -18,6 +19,13 @@ export default function Log(): JSX.Element {
   ]
   const [activeKey, setActiveKey] = useState(initialItems[0].key)
   const [items, setItems] = useState(initialItems)
+
+  useEffect(() => {
+    window.electron.ipcRenderer.invoke('platform').then((res) => {
+      setPlatform(res)
+    })
+  }, [])
+
   // initial items
   // useState side
   const onChange = (newActiveKey: string): void => {
@@ -65,7 +73,13 @@ export default function Log(): JSX.Element {
   const add = useCallback((fileName: string): void => {
     const newActiveKey = `newTab${newTabIndex.current++}`
     const newPane = {
-      label: <Tooltip title={fileName}>{fileName.split('/').pop()}</Tooltip>,
+      label: (
+        <Tooltip title={fileName}>
+          {platform === 'linux' || platform === 'darwin'
+            ? fileName.split('/').pop()
+            : fileName.split('\\').pop()}
+        </Tooltip>
+      ),
       children: <LogContent fileName={fileName} />,
       key: newActiveKey
     }
