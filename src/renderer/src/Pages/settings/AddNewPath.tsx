@@ -1,4 +1,4 @@
-import { Alert, Button, Flex, Input, Rate, Table, Tag } from 'antd'
+import { Alert, Button, Flex, Input, Rate, Table, Tag, Tooltip } from 'antd'
 import { useEffect, useState } from 'react'
 import { FolderOutlined } from '@ant-design/icons'
 import type { Path } from '../../types'
@@ -137,7 +137,12 @@ export default function AddNewPath(): JSX.Element {
         dataSource={paths.map((path, index) => ({
           icon: <FolderOutlined />,
           key: index,
-          path: <Tag color="blue">{path.path}</Tag>,
+          path: (
+            <Tooltip title={path.path}>
+              {' '}
+              <Tag color="blue">{path.path.slice(0, 20)}</Tag>
+            </Tooltip>
+          ),
           serverName: path.serverName,
           createdAt: new Date(path.createdAt).toLocaleString(),
           favorite: (
