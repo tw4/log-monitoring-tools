@@ -1,4 +1,4 @@
-import { Col, Flex, Row, Statistic, Table, Tag } from 'antd'
+import { Col, Flex, Row, Statistic, Table, Tag, Tooltip } from 'antd'
 import { useEffect, useState } from 'react'
 import { FolderOutlined } from '@ant-design/icons'
 import type { Path, Statistics } from '../types'
@@ -87,7 +87,11 @@ export default function Home(): JSX.Element {
         dataSource={Paths.map((path, index) => ({
           icon: <FolderOutlined />,
           key: index,
-          path: <Tag color="orange">{path.path}</Tag>,
+          path: (
+            <Tooltip title={path.path}>
+              <Tag color="orange">{path.path.slice(0, 20)}</Tag>
+            </Tooltip>
+          ),
           serverName: path.serverName,
           lastOpened: path.lastOpened ? new Date(path.lastOpened).toLocaleString() : 'Never'
         }))}
