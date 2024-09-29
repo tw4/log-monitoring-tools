@@ -9,7 +9,6 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string
 export default function Log(): JSX.Element {
   const newTabIndex = useRef(0)
   const [selectedFile, setSelectedFile] = useState<string[]>([])
-  const [platform, setPlatform] = useState<string>('')
   const initialItems = [
     {
       label: <Tooltip title="File List">File List</Tooltip>,
@@ -19,12 +18,6 @@ export default function Log(): JSX.Element {
   ]
   const [activeKey, setActiveKey] = useState(initialItems[0].key)
   const [items, setItems] = useState(initialItems)
-
-  useEffect(() => {
-    window.electron.ipcRenderer.invoke('platform').then((res) => {
-      setPlatform(res)
-    })
-  }, [])
 
   // initial items
   // useState side
@@ -62,7 +55,6 @@ export default function Log(): JSX.Element {
   ): void => {
     if (action === 'add') {
       selectedFile.forEach((fileName) => {
-        console.log(fileName)
         add(fileName)
       })
     } else {
@@ -75,7 +67,8 @@ export default function Log(): JSX.Element {
     const newPane = {
       label: (
         <Tooltip title={fileName}>
-          {platform === 'linux' || platform === 'darwin'
+          {localStorage.getItem('platform') === 'linux' ||
+          localStorage.getItem('platform') === 'darwin'
             ? fileName.split('/').pop()
             : fileName.split('\\').pop()}
         </Tooltip>

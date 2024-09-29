@@ -40,6 +40,10 @@ export default function Home(): JSX.Element {
       const pathsArray = JSON.parse(paths)
       setTotalPathsCount(pathsArray.length)
 
+      window.electron.ipcRenderer.invoke('platform').then(async (res) => {
+        localStorage.setItem('platform', res)
+      })
+
       // get paths
       const data: Path[] = paths ? JSON.parse(paths) : []
       setPaths(data)
