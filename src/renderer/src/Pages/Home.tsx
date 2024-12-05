@@ -67,7 +67,7 @@ export default function Home(): JSX.Element {
     <>
       {loading ? (
         <Flex vertical>
-          <LoadingOutlined style={{ fontSize: 24 }} spin />
+          <LoadingOutlined style={{ fontSize: 24 }} />
         </Flex>
       ) : (
         <Row>

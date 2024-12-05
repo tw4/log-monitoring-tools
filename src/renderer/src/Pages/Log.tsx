@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import FileList from '@renderer/components/FileList'
 import { Button, Flex, Tabs, Tooltip } from 'antd'
 import LogContent from '@renderer/components/LogContent'

@@ -3,7 +3,6 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import registerHandlers from './handlers'
-import { promises } from 'dns'
 
 function createWindow(): void {
   // Create the browser window.
